@@ -38,25 +38,25 @@ function App() {
   };
 
   const comprar = (id) => {
-    setProdutos(
-      produtos.map((produto) =>
-        produto.id === id
-          ? {
-              ...produtos,
-              nome: produto.nome,
-              estoque: parseInt(produto.estoque) + 1,
-              vlrCompra: produto.vlrCompra,
-              vlrVenda: produto.vlrVenda,
-            }
-          : produto
-      )
-    );
     produtos.map((produto) => {
       if (produto.id === id) {
         if (vlrCaixa >= produto.vlrCompra)
           setVlrCaixa(vlrCaixa - parseFloat(produto.vlrCompra));
+        setProdutos(
+          produtos.map((produto) =>
+            produto.id === id
+              ? {
+                  ...produtos,
+                  nome: produto.nome,
+                  estoque: parseInt(produto.estoque) + 1,
+                  vlrCompra: produto.vlrCompra,
+                  vlrVenda: produto.vlrVenda,
+                }
+              : produto
+          )
+        );
       } else {
-        prompt.alert("Sem saldo suficiente em caixa");
+        window.alert("Sem saldo suficiente em caixa");
       }
     });
   };
